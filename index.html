@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>HỌC TIẾNG TRUNG QUỐC CÔ HÀ – Ôn tập HSK 1</title>
+<style>
+:root{--pr:#c23320;--bg:#f7f3ea;--cd:#fff;--bd:#e6dccb;--ink:#33302a;--mu:#7d766a;--ok:#e4f1ea;--okb:#6aa88a;--no:#f6e3df;--nob:#c98a80}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.5 'Times New Roman',SimSun,serif;display:flex;min-height:100vh}
+.hz{font-family:SimSun,'Noto Serif SC',serif}button{font:inherit;cursor:pointer;border:1px solid var(--bd);background:var(--cd);border-radius:10px;padding:7px 12px;color:var(--ink)}
+button:hover{border-color:var(--pr)}
+#sb{width:210px;background:var(--cd);border-right:1px solid var(--bd);padding:12px;position:sticky;top:0;height:100vh;overflow:auto}
+#sb b{color:var(--pr);display:block;margin-bottom:8px}#sb button{display:block;width:100%;text-align:left;margin:4px 0;border:0;background:none}
+#sb button.on{background:#fbeae5;color:var(--pr);font-weight:700;border-left:4px solid var(--pr);border-radius:6px}
+#mn{flex:1;min-width:0;padding:14px 20px}#tb{display:flex;gap:6px;flex-wrap:wrap;border-bottom:2px solid var(--bd);margin-bottom:14px}
+#tb button{border:0;border-radius:10px 10px 0 0;background:none;padding:9px 14px}#tb button.on{border-bottom:3px solid var(--pr);color:var(--pr);font-weight:700;background:var(--cd)}
+.card{background:var(--cd);border:1px solid var(--bd);border-radius:16px;padding:16px;margin-bottom:14px}
+.home{text-align:center;padding:30px 10px}.home .big{font-size:64px;color:var(--pr);margin:6px 0}.badge{display:inline-block;background:var(--pr);color:#fff;border-radius:20px;padding:2px 14px}
+.z{display:inline-block;margin:10px 0;background:var(--pr);color:#fff;text-decoration:none;border-radius:12px;padding:9px 18px}
+table{width:100%;border-collapse:collapse}th,td{border-bottom:1px solid var(--bd);padding:8px;text-align:left;vertical-align:top}th{background:#fbeae5;color:var(--pr)}
+td.h{font-size:24px}.dl{display:flex;gap:10px;margin:10px 0;align-items:flex-start;flex-wrap:wrap}.who{min-width:70px;color:var(--pr);font-weight:700}
+.q{background:var(--cd);border:1px solid var(--bd);border-radius:14px;padding:12px;margin:10px 0}.q p{margin:0 0 8px;font-size:19px}
+.o{display:block;width:100%;text-align:left;margin:5px 0;font-size:18px}.o.ok{background:var(--ok);border-color:var(--okb)}.o.no{background:var(--no);border-color:var(--nob)}
+small{display:block;color:var(--mu);margin-top:4px}.sc{font-weight:700;color:var(--pr)}h3{color:var(--pr);margin:18px 0 6px}
+.chip{font-size:20px;margin:3px}.ans{min-height:40px;border:2px dashed var(--bd);border-radius:10px;padding:6px;margin:8px 0;font-size:22px}
+.fc{perspective:700px}.fc>div{min-height:200px;border:2px solid var(--bd);border-radius:18px;background:var(--cd);display:flex;align-items:center;justify-content:center;flex-direction:column;text-align:center;cursor:pointer;padding:10px}
+.fc.f>div{border-color:var(--pr);background:#fff7f4}.g{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}.g .fc>div{min-height:110px}
+.fc.f .fr{display:none}.fc:not(.f) .bk{display:none}.w{color:var(--mu);text-align:center;padding:40px}
+@media(max-width:760px){body{display:block}#sb{width:auto;height:auto;position:static;display:flex;overflow:auto;gap:4px;border-right:0;border-bottom:1px solid var(--bd)}#sb b{display:none}#sb button{width:auto;white-space:nowrap}}
+input{font:inherit;padding:8px 10px;border:1px solid var(--bd);border-radius:10px;width:min(280px,90%)}#sb button:disabled{opacity:.4;cursor:not-allowed}</style></head><body>
+<div id="sb"><b>HSK 1 · 15 bài</b></div><div id="mn"><div id="tb"></div><div id="ct"></div></div>
+<script>
+const SCRIPT_URL='https://script.google.com/macros/s/AKfycbzc2gUhxB5rXbTg2Ywa-yplPqObXBeAdzmL8e5-pce-Gm3vY5YxBg0GvJ3sHiFfS2-1Qw/exec'; // dán link /exec của Apps Script
+const ZALO='https://zalo.me/0914490382'; // vị trí nhúng link Zalo
+const $=s=>document.querySelector(s),sh=a=>[...a].sort(()=>Math.random()-.5),pk=(a,n,ex)=>sh(a.filter(x=>x!==ex)).slice(0,n);
+const mk=(q,a,wr,e,say)=>{const o=sh([a,...wr]);return{q,o,a:o.indexOf(a),e,say}};
+const D={};
+const TABS=[['home','Trang chủ'],['vocab','Từ vựng'],['text','Bài khóa'],['flash','Flashcard'],['ov','Ôn từ vựng'],['og','Ôn ngữ pháp'],['ln','Luyện nghe']];
+let cur=1,tab='home',Q={},S={},F={},SK={},T0=Date.now(),ID='',CODE='',OPEN=[];
+function say(t){speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t),v=speechSynthesis.getVoices().find(x=>/^zh/i.test(x.lang));if(v)u.voice=v;u.lang='zh-CN';u.rate=.85;speechSynthesis.speak(u)}
+let mr=null;
+async function rec(k){const b=document.getElementById('r'+k);if(mr&&mr.state==='recording'){mr.stop();return}
+ try{const s=await navigator.mediaDevices.getUserMedia({audio:true});mr=new MediaRecorder(s);const c=[];mr.ondataavailable=e=>c.push(e.data);
+ mr.onstop=()=>{s.getTracks().forEach(t=>t.stop());const a=document.getElementById('a'+k);a.src=URL.createObjectURL(new Blob(c));a.hidden=false;b.textContent='🎙 Ghi lại'};mr.start();b.textContent='⏹ Dừng'}catch(e){alert('Không mở được micro (cần cho phép quyền ghi âm).')}}
+const au=(k,t)=>`<button onclick="say('${t}')">🔊</button> <button id="r${k}" onclick="rec('${k}')">🎙 Ghi âm</button> <audio id="a${k}" controls hidden></audio>`;
+function quiz(id,it){Q[id]=it;S[id]=0;return it.map((x,i)=>`<div class="q"><p>${i+1}. ${x.say?`<button onclick="say('${x.say}')">🔊 Nghe</button> `:''}${x.q}</p>${x.o.map((o,j)=>`<button class="o" onclick="ans('${id}',${i},${j},this)">${o}</button>`).join('')}</div>`).join('')+`<p class="sc" id="s${id}"></p>`}
+function ans(id,i,j,b){const x=Q[id][i],p=b.parentNode;if(p.dataset.d)return;p.dataset.d=1;p.querySelectorAll('.o')[x.a].classList.add('ok');if(j!==x.a)b.classList.add('no');else S[id]++;if(x.e)p.insertAdjacentHTML('beforeend',`<small>${x.e}</small>`);document.getElementById('s'+id).textContent='Đúng '+S[id]+'/'+Q[id].length}
+function sortEx(id,it){Q[id]=it;return it.map((x,i)=>`<div class="q"><p>${x[0]}</p>${sh(x[1].split('|')).map(w=>`<button class="chip hz" onclick="pw('${id}${i}',this)">${w}</button>`).join('')}<div class="ans hz" id="${id}${i}a"></div><button onclick="ck('${id}',${i})">Kiểm tra</button> <button onclick="render()">Làm lại</button> <b id="${id}${i}r"></b></div>`).join('')}
+function pw(k,b){b.disabled=true;document.getElementById(k+'a').textContent+=b.textContent}
+function ck(id,i){const r=document.getElementById(id+i+'r'),ok=document.getElementById(id+i+'a').textContent===Q[id][i][1].split('|').join('');SK[id+i]=ok;r.textContent=ok?'✓ Đúng':'✗ Chưa đúng';r.style.color=ok?'#3f7d5f':'#a8554a'}
+function flash(d){const W=d.w;if(!F.o||F.o.length!==W.length)F.o=W.map((_,i)=>i);const card=(i,k)=>{const w=W[i];return`<div class="fc ${F.all?'f':''}" onclick="this.classList.toggle('f')"><div><span class="hz" style="font-size:${k?30:80}px">${w[0]}</span></div></div>`};
+ const back=i=>{const w=W[i];return`${w[1]} · ${w[2]}`};
+ if(F.m==='all')return`<button onclick="F.m='one';render()">Xem từng thẻ</button> <button onclick="F.all=!F.all;render()">Lật tất cả</button> <button onclick="F.o=sh(F.o);render()">Xáo trộn</button><div class="g" style="margin-top:12px">${F.o.map(i=>`<div class="fc ${F.all?'f':''}" onclick="this.classList.toggle('f')"><div><span class="hz fr" style="font-size:30px">${W[i][0]}</span><span class="bk">${back(i)}</span></div></div>`).join('')}</div>`;
+ const i=F.o[F.i||0];return`<p>Thẻ ${(F.i||0)+1}/${W.length}</p><div class="fc ${F.f?'f':''}" onclick="F.f=!F.f;render()"><div>${F.f?`<div style="font-size:26px">${W[i][1]}</div><div style="font-size:22px;margin-top:6px">${W[i][2]}</div><small>${W[i][3]}</small>`:`<span class="hz" style="font-size:80px">${W[i][0]}</span>`}</div></div><p><button onclick="F.i=((F.i||0)+W.length-1)%W.length;F.f=0;render()">◀</button> <button onclick="say('${W[i][0]}')">🔊</button> <button onclick="F.i=((F.i||0)+1)%W.length;F.f=0;render()">▶</button> <button onclick="F.o=sh(F.o);F.i=0;F.f=0;render()">Xáo trộn</button> <button onclick="F.m='all';render()">Xem tất cả thẻ</button></p>`}
+function render(){
+ $('#tb').innerHTML=TABS.map(t=>`<button class="${t[0]===tab?'on':''}" onclick="tab='${t[0]}';F={};SK={};T0=Date.now();render()">${t[1]}</button>`).join('');
+ if(!ID){$('#tb').innerHTML='';$('#sb').innerHTML='<b>HSK 1 · 15 bài</b>';$('#ct').innerHTML=`<div class="card home"><div class="badge">HỌC TIẾNG TRUNG QUỐC CÔ HÀ</div><h2>Đăng nhập</h2><p><input id="sid" placeholder="Mã sinh viên" autocomplete="off"></p><p><input id="scode" placeholder="Mã phòng" autocomplete="off"></p><button onclick="login()" style="background:var(--pr);color:#fff">Vào học</button><p class="sc" id="lm"></p><a class="z" href="${ZALO}" target="_blank">Zalo 0914490382</a></div>`;return}
+ $('#sb').innerHTML='<b>HSK 1 · 15 bài</b>'+Array.from({length:15},(_,i)=>{const n=i+1;return OPEN.includes(n)?`<button class="${n===cur?'on':''}" onclick="go(${n})">Bài ${n}${D[n]?' · '+D[n].t:''}</button>`:`<button disabled>🔒 Bài ${n}</button>`}).join('')+'<button onclick="logout()">Thoát</button>';
+ const d=D[cur],c=$('#ct');
+ if(!d){c.innerHTML=tab==='home'?`<div class="card home"><div class="badge">HỌC TIẾNG TRUNG QUỐC CÔ HÀ</div><h2>Bài ${cur}</h2><a class="z" href="${ZALO}" target="_blank">Zalo 0914490382</a><p class="w">Bài này đang chờ soạn.</p></div>`:'<div class="card w">Bài này đang chờ soạn.</div>';return}
+ const W=d.w;let h='';
+ if(tab==='home')h=`<div class="card home"><div class="badge">HỌC TIẾNG TRUNG QUỐC CÔ HÀ</div><br><a class="z" href="${ZALO}" target="_blank">Zalo 0914490382</a><div class="mu">Bài ${cur}</div><div class="big hz">${d.t}</div><div style="font-size:26px">${d.p}</div><div style="font-size:22px;color:#7d766a">${d.v}</div><div style="text-align:left;max-width:560px;margin:18px auto"><h3>Mục tiêu bài học</h3><ul>${d.goal.map(g=>`<li>${g}</li>`).join('')}</ul></div></div>`;
+ if(tab==='vocab')h=`<div class="card"><table><tr><th>STT</th><th>Chữ Hán</th><th>Phiên âm</th><th>Nghĩa</th><th>Từ loại</th><th>Cụm thường gặp</th><th>Nghe · Ghi âm</th></tr>${W.map((w,i)=>`<tr><td>${i+1}</td><td class="h hz">${w[0]}</td><td>${w[1]}</td><td>${w[2]}</td><td>${w[3]}</td><td class="hz">${w[4]}</td><td>${au('v'+i,w[0])}</td></tr>`).join('')}</table></div>`;
+ if(tab==='text')h=d.dlg.map((g,n)=>`<div class="card"><h3>Hội thoại ${n+1}</h3>${g.map((l,i)=>`<div class="dl"><span class="who">${l[0]}</span><div style="flex:1"><div class="hz" style="font-size:24px">${l[1]}</div><div>${l[2]}</div><small>${l[3]}</small></div><div>${au('t'+n+i,l[1])}</div></div>`).join('')}</div>`).join('');
+ if(tab==='flash')h=flash(d);
+ if(tab==='ov'){const m=W.map(w=>w[2]),z=W.map(w=>w[0]);h=`<h3>Dạng 1 · ${cur>=3?'Nghe và chọn nghĩa đúng':'Chọn nghĩa đúng'}</h3>${quiz('o1',sh(W).slice(0,10).map(w=>mk(cur>=3?`Bấm 🔊 để nghe, rồi chọn nghĩa đúng`:`<b class="hz" style="font-size:24px">${w[0]}</b> nghĩa là gì?`,w[2],pk(m,3,w[2]),`${w[0]} ${w[1]}: ${w[2]}`,w[0])))}<h3>Dạng 2 · Chọn chữ Hán theo phiên âm</h3>${quiz('o2',sh(W).slice(0,8).map(w=>mk(`<b>${w[1]}</b> (${w[2]})`,w[0],pk(z,3,w[0]),null)))}<h3>Dạng 3 · Điền từ vào câu</h3>${quiz('o3',d.fill.map(f=>mk(`<span class="hz">${f[0]}</span>`,f[1],f[2],null)))}`}
+ if(tab==='og')h=`<h3>Dạng 1 · Chọn đáp án đúng</h3>${quiz('g1',d.mc.map(f=>mk(f[0],f[1],f[2],null)))}<h3>Dạng 2 · Sắp xếp từ thành câu</h3>${sortEx('so',d.so)}<h3>Dạng 3 · Đúng hay sai</h3>${quiz('g3',d.tf.map(f=>({q:f[0],o:['Đúng','Sai'],a:f[1]?0:1,e:f[2]})))}`;
+ if(tab==='ln')h=`<p>Bấm 🔊 để nghe rồi chọn đáp án.</p>${quiz('l1',d.ls.map(f=>mk(f[1],f[2],f[3],`Câu nghe: ${f[0]}`,f[0].replace(/[！，]/g,''))))}`;
+ if(SUB[tab])h+='<div class="card"><b>Nộp điểm lên lớp</b> <button onclick="send()">Nộp điểm</button> <span id="st" class="sc"></span></div>';c.innerHTML=h;
+}
+const SUB={ov:['TV',['o1','o2','o3']],og:['NP',['g1','g3'],'so'],ln:['NGHE',['l1']]};
+const api=o=>fetch(SCRIPT_URL,{method:'POST',body:JSON.stringify({id:ID,code:CODE,...o})}).then(x=>x.json());
+async function login(){ID=$('#sid').value.trim();CODE=$('#scode').value.trim();const m=$('#lm');
+ if(!ID||!CODE){m.textContent='Hãy nhập Mã SV và Mã phòng.';ID='';return}
+ if(!SCRIPT_URL){m.textContent='Chưa gắn SCRIPT_URL.';ID='';return}
+ m.textContent='Đang kiểm tra...';
+ try{const d=await api({a:'login'});if(!d.ok){m.textContent=d.msg;ID='';CODE='';return}OPEN=d.open;go(OPEN[0])}catch(e){m.textContent='Lỗi kết nối, hãy thử lại.';ID=''}}
+async function go(n){cur=n;tab='home';F={};SK={};T0=Date.now();
+ if(D[n]===undefined){$('#ct').innerHTML='<div class="card w">Đang tải bài...</div>';
+  try{const d=await api({a:'lesson',b:n});if(!d.ok){alert(d.msg);logout();return}D[n]=d.data}catch(e){alert('Lỗi kết nối, hãy thử lại.');return}}
+ render()}
+function logout(){ID='';CODE='';OPEN=[];render()}
+async function send(){const st=$('#st'),m=SUB[tab];let r=0,t=0;
+ m[1].forEach(k=>{r+=S[k]||0;t+=Q[k].length});if(m[2])Q[m[2]].forEach((_,i)=>{t++;if(SK[m[2]+i])r++});
+ st.textContent='Đang gửi...';
+ try{const d=await api({a:'submit',b:cur,t:m[0],right:r,total:t,secs:Math.round((Date.now()-T0)/1000)});
+ st.textContent=d.ok?`Đã ghi điểm: ${d.score}/10 (đúng ${r}/${t}).`:d.msg}catch(e){st.textContent='Lỗi kết nối, hãy thử lại.'}}
+speechSynthesis.onvoiceschanged=()=>{};render();
+</script></body></html>
